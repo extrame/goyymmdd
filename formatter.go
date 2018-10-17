@@ -67,6 +67,8 @@ type MonthFormatter struct {
 
 func (self *MonthFormatter) translateToGolangFormat() (string, error) {
 	switch len(self.origin) {
+	case 3:
+		return "Jan", nil
 	case 2:
 		return "01", nil
 	case 1:
