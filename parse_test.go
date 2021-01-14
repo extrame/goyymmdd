@@ -18,12 +18,25 @@ var tests = []struct {
 	{"yyyy-mm-dd", "2018-03-15"},
 }
 
+func TestFormate(t *testing.T) {
+	for i, testCase := range tests {
+		_, tokens := Lexer(testCase.format)
+		ds := parse(tokens)
+		actual := ds.Format(date)
+
+		if actual != testCase.expected {
+			t.Errorf("Case index %d failed. Expected: %s, Got: %s", i, testCase.expected, actual)
+		}
+	}
+}
+
 func TestParse(t *testing.T) {
 	for i, testCase := range tests {
 		_, tokens := Lexer(testCase.format)
-		ds := Parse(tokens)
-		actual := ds.Format(date)
-		if actual != testCase.expected {
+		ds := parse(tokens)
+		actual, err := ds.Parse(testCase.expected)
+
+		if err != nil || actual.UnixNano() != date.UnixNano() {
 			t.Errorf("Case index %d failed. Expected: %s, Got: %s", i, testCase.expected, actual)
 		}
 	}

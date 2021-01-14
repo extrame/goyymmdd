@@ -4,6 +4,6 @@ import "time"
 
 func Format(time time.Time, layout string) string {
 	_, tokens := Lexer(layout)
-	ds := Parse(tokens)
+	ds := parse(tokens)
 	return ds.Format(time)
 }

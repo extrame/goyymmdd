@@ -102,13 +102,25 @@ func initLexerState(l *lexer) lexerState {
 			l.emitRaw()
 			l.acceptRun("y")
 			l.emit(T_YEAR_MARK)
-		} else if r == "m" {
+		} else if r == "M" {
 			l.emitRaw()
-			l.acceptRun("m")
+			l.acceptRun("M")
 			l.emit(T_MONTH_MARK)
 		} else if r == "d" {
 			l.emitRaw()
 			l.acceptRun("d")
+			l.emit(T_DAY_MARK)
+		} else if r == "h" {
+			l.emitRaw()
+			l.acceptRun("h")
+			l.emit(T_DAY_MARK)
+		} else if r == "m" {
+			l.emitRaw()
+			l.acceptRun("m")
+			l.emit(T_DAY_MARK)
+		} else if r == "s" {
+			l.emitRaw()
+			l.acceptRun("s")
 			l.emit(T_DAY_MARK)
 		}
 	}

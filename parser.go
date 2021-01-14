@@ -1,8 +1,16 @@
 package yymmdd
 
+import "time"
+
+func Parse(value, format string) (time.Time, error) {
+	_, tokens := Lexer(format)
+	ds := parse(tokens)
+	return ds.Parse(value)
+}
+
 // Parse creates a new parser with the recommended
 // parameters.
-func Parse(tokens []LexToken) Formatter {
+func parse(tokens []LexToken) Formatter {
 	p := &parser{
 		tokens: tokens,
 		pos:    -1,
@@ -55,6 +63,12 @@ func initialParserState(p *parser, f *Formatter) parserState {
 			item = new(MonthFormatter)
 		case T_DAY_MARK:
 			item = new(DayFormatter)
+		case T_HOUR_MARK:
+			item = new(MonthFormatter)
+		case T_MINUTE_MARK:
+			item = new(MonthFormatter)
+		case T_SECOND_MARK:
+			item = new(MonthFormatter)
 		case T_RAW_MARK:
 			item = new(basicFormatter)
 		}
